@@ -1,21 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
-/**
- *
- * @author juane
- */
 public class vista extends javax.swing.JFrame {
-
-    /**
-     * Creates new form vista
-     */
+    
+    //Valores de tamaño de ventana cambiar si se cambia diseño
+    public final int height = 720;
+    public final int width = 1280;
+    
+    //Valores de tamaño de panel main
+    public final int heightMain = 720;
+    public final int widthMain = 1280;
+    
+    public void init(){
+        this.setVisible(true);
+        this.reset();
+    }
+    
+    public void reset(){
+        //Para repintar si añaden componentes depues
+        this.revalidate();
+        this.repaint();
+    }
+    
     public vista() {
         initComponents();
         this.setLocationRelativeTo(this);
+        
     }
 
     /**
@@ -27,30 +36,39 @@ public class vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menu = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        main = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("StudentMate");
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        menu.setBackground(new java.awt.Color(102, 153, 255));
+        menu.setPreferredSize(new java.awt.Dimension(1270, 720));
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        setJMenuBar(jMenuBar1);
+        main.setBackground(new java.awt.Color(255, 255, 255));
+        main.setLayout(null);
+        jScrollPane1.setViewportView(main);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1270, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addGap(0, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        getContentPane().add(menu, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -61,8 +79,8 @@ public class vista extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JPanel main;
+    private javax.swing.JPanel menu;
     // End of variables declaration//GEN-END:variables
 }
