@@ -1,15 +1,14 @@
 package modelo;
 
-import java.util.Date;
 
 public class Recordatorio implements Comparable<Recordatorio>{
   private String titulo;
     private String descripcion;
-    private Date fechaHora;
+    private String fechaHora;
     private boolean Completado;
 
     // Constructor
-    public Recordatorio(String titulo, String descripcion, Date fechaHora) {
+    public Recordatorio(String titulo, String descripcion, String fechaHora) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaHora = fechaHora;
@@ -33,11 +32,11 @@ public class Recordatorio implements Comparable<Recordatorio>{
         this.descripcion = descripcion;
     }
 
-    public Date getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -58,10 +57,10 @@ public class Recordatorio implements Comparable<Recordatorio>{
     @Override
     public String toString() {
         return "Recordatorio{" +
-                "titulo='" + titulo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", fechaHora=" + fechaHora +
-                '}';
+                "titulo = '" + titulo + '\'' +
+                ", descripcion = '" + descripcion + '\'' +
+                ", fechaHora = " + fechaHora +
+                ", ischecked =" + Completado + '}';
     }
 
     //Comparar por fecha

@@ -55,7 +55,7 @@ public class pila<T> extends List<T> {
     // Clase Lista para tener clase padre con todos los atributos
     class List<T> {
         
-        Node<T> head;
+        public Node<T> head;
 
         // Método para verificar si la lista está vacía
         public boolean Empty() {
@@ -75,13 +75,15 @@ public class pila<T> extends List<T> {
 
         // Método para imprimir la lista
         public void printList() {
+            int p= 0;
             if (Empty()) {
                 System.out.println("Lista vacia");
                 return;
             }
             Node<T> temp = head;
             while (temp != null) {
-                System.out.println(temp.data);
+                System.out.println('(' + String.valueOf(p)+')' + temp.data);
+                p++;
                 temp = temp.next;
             }
         }
@@ -103,6 +105,20 @@ public class pila<T> extends List<T> {
                 }
                 temp = temp.next;
             }
+        }
+        
+        public T get(int index){
+            int i= 0;
+            Node<T> temp = head;
+            while(index>i){
+                try{
+                temp = temp.next;}
+                catch(Exception e){
+                    System.out.println("No exite tal elemento");
+                    return null;
+                }i++;
+            }
+            return temp.data;
         }
     }
 

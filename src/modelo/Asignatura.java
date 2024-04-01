@@ -1,6 +1,6 @@
 package modelo;
 
-public class Asignatura {
+public class Asignatura implements Comparable<Asignatura>{
     
     private String nombre;
     private String codigo;
@@ -49,10 +49,21 @@ public class Asignatura {
     @Override
     public String toString() {
         return "Asignatura{" +
-                "nombre='" + nombre + '\'' +
-                ", codigo='" + codigo + '\'' +
-                ", profesor='" + profesor + '\'' +
-                ", creditos=" + creditos +
+                "nombre = '" + nombre + '\'' +
+                ", codigo = '" + codigo + '\'' +
+                ", profesor = '" + profesor + '\'' +
+                ", creditos = " + creditos +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Asignatura o) {
+        if(this.creditos > o.getCreditos()){
+            return 1;
+        }else if(this.creditos < o.getCreditos()){
+            return -1;
+        }else{
+            return 0;
+        }
     }
 }

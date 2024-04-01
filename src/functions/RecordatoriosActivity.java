@@ -1,18 +1,19 @@
 package functions;
 
+
 import DataEstructures.OrderedLinkedList;
+import DataEstructures.OrderedLinkedList.Node;
 import DataEstructures.pila;
 import modelo.Recordatorio;
 
-public class RecordatariosActivity{
+public class RecordatoriosActivity{
     
     private pila<Recordatorio> listado;
-    private OrderedLinkedList<Recordatorio> listadoOrdenado;
     
-    public RecordatariosActivity(){
+    
+    public RecordatoriosActivity(){
         //cambiar a getRecordatirios para persistencia
         this.listado = new pila<>();
-        this.listadoOrdenado = new OrderedLinkedList();
     }
     
     private pila<Recordatorio> getRecordatorios(){
@@ -29,7 +30,6 @@ public class RecordatariosActivity{
     
     public void addRecordatorio(Recordatorio record){
         listado.push(record);
-        listadoOrdenado.insert(record);
     }
     
     public void checkRecordatorio(Recordatorio record){
@@ -37,18 +37,8 @@ public class RecordatariosActivity{
     }
     
     public void printRecordatorios(){
-        if(listado.Empty()){
-            System.out.println("No hay registros");
-        }
-        while(!listado.Empty()){
-            System.out.println(listado.pop());
-        }
+        listado.printList();
     }
-    
-    public void printRecordatoriosOrdenados(){
-        System.out.println(listadoOrdenado.printRecursive());
-    }
-    
     
     public pila<Recordatorio> getListado(){
         return this.listado;

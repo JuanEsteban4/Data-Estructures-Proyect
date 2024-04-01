@@ -2,7 +2,7 @@ package DataEstructures;
 
 public class OrderedLinkedList<T extends Comparable<T>>{
         //atributo head de tipo nodo<T>
-        private Node<T> head;
+        public Node<T> head;
 
         //Set & Get de Head
         public Node<T> getHead() {
@@ -19,7 +19,7 @@ public class OrderedLinkedList<T extends Comparable<T>>{
         }
 
         //Clase node<T>
-        private static class Node<T> {
+        public static class Node<T> {
             private T data;
             private Node<T> next;
 
@@ -63,7 +63,60 @@ public class OrderedLinkedList<T extends Comparable<T>>{
             }
         }
 
+        
+        //Metodo para encontrar un dato con busqueda binaria (BigO(Log(n)))
+        public Node<T> find(OrderedLinkedList<T> list, T key) {
+            Node<T> left = list.getHead();
+            Node<T> right = findFinal(list);
 
+            while (left != right && left != null && right != null && left.getNext() != right) {
+                Node<T> mid = getMidNode(left, right);
+
+                if (mid.getData().compareTo(key) == 0) {
+                    return mid;
+                } else if (mid.getData().compareTo(key) < 0) {
+                    left = mid.getNext();
+                } else {
+                    right = mid;
+                }
+            }
+
+            // Verificar si el elemento está en la posición left o right
+            if (left != null && left.getData().compareTo(key) == 0) {
+                return left;
+            }
+            if (right != null && right.getData().compareTo(key) == 0) {
+                return right;
+            }
+
+            // Elemento no encontrado
+            return null;
+        }
+
+        //Metodo para encontrar el nodo final de la lista
+        private Node<T> findFinal(OrderedLinkedList<T> list) {
+            Node<T> current = list.getHead();
+            while (current != null && current.getNext() != null) {
+                current = current.getNext();
+            }
+            return current;
+        }
+
+        //Metodo para encontrar el valor de la mitad de mi lista
+        private Node<T> getMidNode(Node<T> left, Node<T> right) {
+            Node<T> slow = left;
+            Node<T> fast = left; // Cuando fast termina la iteración completa, slow está en la mitad de la lista
+                                 // porque avanza de 2 en 2 el fast y slow avanza en 1
+            while (fast != right && fast.getNext() != right) {
+                slow = slow.getNext();
+                fast = fast.getNext().getNext();
+            }
+
+            return slow;
+        }
+        
+        
+        //Metodo para borrar un item
         public boolean delete(T item) {
         if (head == null) {
             return false; // 1 Caso: si head es null.
