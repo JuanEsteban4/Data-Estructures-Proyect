@@ -1,17 +1,31 @@
 package modelo;
 
+import java.io.Serializable;
+import java.util.Date;
 
-public class Recordatorio implements Comparable<Recordatorio>{
-  private String titulo;
+
+public class Recordatorio implements Comparable<Recordatorio>,Serializable{
+    private String titulo;
     private String descripcion;
-    private String fechaHora;
+    private Date fechaHora;
+    private Date fechaIngreso;
     private boolean Completado;
 
     // Constructor
-    public Recordatorio(String titulo, String descripcion, String fechaHora) {
+    public Recordatorio(String titulo, String descripcion, Date fechaHora) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaHora = fechaHora;
+        this.fechaIngreso = new Date();
+        this.Completado = false;
+    }
+    
+    //Constructor para test
+    public Recordatorio(int i){
+        this.titulo = "Titulo " + i;
+        this.descripcion = "Descriocion " + i;
+        this.fechaHora = new Date();
+        this.fechaIngreso = new Date();
         this.Completado = false;
     }
 
@@ -32,11 +46,11 @@ public class Recordatorio implements Comparable<Recordatorio>{
         this.descripcion = descripcion;
     }
 
-    public String getFechaHora() {
+    public Date getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(String fechaHora) {
+    public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -47,10 +61,13 @@ public class Recordatorio implements Comparable<Recordatorio>{
     public void setCompletado(boolean Compleatado) {
         this.Completado = Compleatado;
     }
-    
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 
     // Método para imprimir información del recordatorio

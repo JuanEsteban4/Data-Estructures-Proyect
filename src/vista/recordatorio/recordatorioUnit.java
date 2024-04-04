@@ -1,31 +1,32 @@
-package components;
+package vista.recordatorio;
 
+import java.awt.Color;
 import modelo.Recordatorio;
-import vista.vista;
 
-public class recordatorioVista extends javax.swing.JPanel {
+public class recordatorioUnit extends javax.swing.JPanel {
     
-    public int WIDTH = 900;
-    public int HEIGHT = 180;
-    
-    //Para insertar en vista main
-    private static int puntero = 0;
-    private final int margin = 20;
+    public Recordatorio info;
+    public final int WIDTH = 900;
+    public final int HEIGHT = 180;
     /**
      * Creates new form recordatorio
+     * @param record
      */
-    public recordatorioVista(Recordatorio record) {
+    public recordatorioUnit(Recordatorio record) {
+        this.info = record;
         initComponents();
-        this.titulo.setText(record.getTitulo());
-        this.descripcion.setText(record.getDescripcion());
-        this.fecha.setText(record.getFechaHora().toString());
+        updateInfo();
     }
     
-    public void addRecordatorio(vista vista){
-        this.setBounds((vista.widthMain - WIDTH)/2,puntero*(HEIGHT + margin)+ margin , WIDTH, HEIGHT);
-        vista.main.add(this);        
-        puntero++;        
-        vista.reset();
+    public void updateInfo(){
+        titulo.setText(info.getTitulo());
+        descripcion.setText(info.getDescripcion());
+        fecha.setText(info.getFechaHora() == null ? "" : info.getFechaHora().toString());
+        if(fecha.getText().isEmpty()) fecha.setVisible(false);
+        if(info.isCompletado()) {
+            this.setBackground(Color.CYAN);
+            this.checkButton.setBackground(Color.CYAN);
+        }
     }
 
     /**
@@ -42,6 +43,7 @@ public class recordatorioVista extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
         checkButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -49,18 +51,18 @@ public class recordatorioVista extends javax.swing.JPanel {
         titulo.setBackground(new java.awt.Color(0, 0, 0));
         titulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         titulo.setForeground(new java.awt.Color(0, 0, 0));
-        titulo.setText("titulo");
+        titulo.setText("Ti");
 
         fecha.setForeground(new java.awt.Color(51, 51, 51));
         fecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fecha.png"))); // NOI18N
-        fecha.setText("Fecha");
 
         descripcion.setEditable(false);
         descripcion.setBackground(new java.awt.Color(255, 255, 255));
         descripcion.setColumns(20);
-        descripcion.setForeground(new java.awt.Color(51, 51, 51));
+        descripcion.setForeground(new java.awt.Color(0, 255, 0));
         descripcion.setRows(5);
-        descripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        descripcion.setBorder(null);
+        descripcion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         descripcion.setEnabled(false);
         jScrollPane2.setViewportView(descripcion);
 
@@ -68,6 +70,8 @@ public class recordatorioVista extends javax.swing.JPanel {
         checkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkButton.png"))); // NOI18N
         checkButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         checkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        deleteButton.setText("Borrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,15 +81,17 @@ public class recordatorioVista extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))))
+                        .addGap(57, 57, 57))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteButton)
+                        .addGap(47, 47, 47))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,14 +106,16 @@ public class recordatorioVista extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(fecha)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fecha)
+                    .addComponent(deleteButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton checkButton;
+    public javax.swing.JButton checkButton;
+    public javax.swing.JButton deleteButton;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JLabel fecha;
     private javax.swing.JScrollPane jScrollPane2;

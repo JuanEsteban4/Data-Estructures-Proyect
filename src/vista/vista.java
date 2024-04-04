@@ -9,24 +9,12 @@ public class vista extends javax.swing.JFrame {
     //Valores de tamaño de panel main
     public final int heightMain = 720;
     public final int widthMain = 1280;
-    
-    public void init(){
-        this.setVisible(true);
-        this.reset();
-    }
-    
-    public void reset(){
-        //Para repintar si añaden componentes depues
-        this.revalidate();
-        this.repaint();
-    }
-    
+ 
     public vista() {
         initComponents();
         this.setLocationRelativeTo(this);
         
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,10 +27,10 @@ public class vista extends javax.swing.JFrame {
         menu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         main = new javax.swing.JPanel();
+        recordatorios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StudentMate");
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
         menu.setBackground(new java.awt.Color(102, 153, 255));
@@ -52,19 +40,32 @@ public class vista extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 0));
 
         main.setBackground(new java.awt.Color(255, 255, 255));
-        main.setLayout(null);
+        main.setLayout(new java.awt.GridLayout());
         jScrollPane1.setViewportView(main);
+
+        recordatorios.setText("Recordatorios");
+        recordatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recordatoriosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(recordatorios)
+                .addContainerGap(1095, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
-                .addGap(0, 120, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
+                .addComponent(recordatorios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -72,6 +73,10 @@ public class vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void recordatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordatoriosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recordatoriosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,5 +87,6 @@ public class vista extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel main;
     private javax.swing.JPanel menu;
+    public javax.swing.JButton recordatorios;
     // End of variables declaration//GEN-END:variables
 }
