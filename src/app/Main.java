@@ -5,7 +5,7 @@ import functions.RecordatoriosActivity;
 import java.util.Scanner;
 import modelo.Asignatura;
 import modelo.Recordatorio;
-import controlador.controladorMain;
+import controlador.ControladorMain;
 
 public class Main {
     
@@ -15,7 +15,7 @@ public class Main {
     Scanner leer = new Scanner(System.in);
     
     public static void main(String[] args){
-        new controladorMain().init();
+        new ControladorMain().init();
     }
     
     public void app(){

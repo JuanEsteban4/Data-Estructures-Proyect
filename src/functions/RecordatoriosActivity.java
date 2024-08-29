@@ -36,7 +36,7 @@ public class RecordatoriosActivity{
             Gson gson = new Gson();
             gson.toJson(listado, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error al abrir el archivo");
         }
         
     }
@@ -67,7 +67,7 @@ public class RecordatoriosActivity{
     
     public void printRecordatorios(){
         if(listado.isEmpty()) {
-            System.out.println("no print pq Esta vacio");
+            System.out.println("listado de recordatorios se encuentra vacio");
             return;
         }
         for(Recordatorio e: listado){

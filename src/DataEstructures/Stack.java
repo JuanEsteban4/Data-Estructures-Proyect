@@ -1,7 +1,7 @@
 package DataEstructures;
 
 // Clase Stack que extiende de Lista para representar una pila, nombrando los metodos en el contexto de la pila
-public class pila<T> extends LinkedList<T> {
+public class Stack<T> extends LinkedList<T> {
 
         // Método para vaciar la pila
         public void clear() {

@@ -5,17 +5,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
-import vista.inicioVista;
-import vista.vista;
+import vista.InicioVista;
+import vista.Vista;
 
-public class controladorMain implements ActionListener{
-    vista vista;
-    controladorRecordatorios controlRecordatorios;
+public class ControladorMain implements ActionListener{
+    Vista vista;
+    ControladorRecordatorios controlRecordatorios;
+    ControladorAsignaturas controlAsignaturas;
     
-    public controladorMain(){
-        this.vista = new vista();
-        this.controlRecordatorios = new controladorRecordatorios(this);
-        
+    public ControladorMain(){
+        this.vista = new Vista();
+        this.controlRecordatorios = new ControladorRecordatorios(this);
+        this.controlAsignaturas = new ControladorAsignaturas(this);
         this.vista.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e){
@@ -25,10 +26,11 @@ public class controladorMain implements ActionListener{
     }
     
     public void init(){
-        vista.setLocationRelativeTo(null);
-        vista.setVisible(true);
-        this.setMain(new inicioVista());
-        vista.recordatorios.addActionListener(this);
+        this.vista.setLocationRelativeTo(null);
+        this.vista.setVisible(true);
+        this.setMain(new InicioVista());
+        this.vista.recordatorios.addActionListener(this);
+        this.vista.asignaturas.addActionListener(this);
     }
     
     public void setMain(JPanel vista){
@@ -49,8 +51,10 @@ public class controladorMain implements ActionListener{
         if(e.getSource() == vista.recordatorios){
             controlRecordatorios.init();
         }
+        if(e.getSource() == vista.asignaturas){
+            controlAsignaturas.init();
+        }
+        
     }
 
-
-    
 }

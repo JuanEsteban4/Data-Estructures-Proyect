@@ -3,17 +3,17 @@ package functions;
 
 import DataEstructures.OrderedLinkedList;
 import DataEstructures.OrderedLinkedList.Node;
-import DataEstructures.pila;
+import DataEstructures.Stack;
 import modelo.Asignatura;
 
 public class AsignaturasActivity  {
     
     private OrderedLinkedList<Asignatura> listadoAsignaturas;
-    private pila<String> codigosPila;
+    private Stack<String> codigosPila;
     
     public AsignaturasActivity() {
         this.listadoAsignaturas = new OrderedLinkedList<>();
-        this.codigosPila = new pila<>();
+        this.codigosPila = new Stack<>();
     }
 
     //Metodo para agregar una asignatura

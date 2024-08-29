@@ -6,23 +6,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import modelo.Recordatorio;
-import vista.recordatorio.agregarRecordatorio;
-import vista.recordatorio.recordatorioUnit;
-import vista.recordatorio.recordatoriosVista;
+import vista.recordatorio.AgregarRecordatorio;
+import vista.recordatorio.RecordatorioUnit;
+import vista.recordatorio.RecordatoriosVista;
 
-public class controladorRecordatorios implements ActionListener{
+public class ControladorRecordatorios implements ActionListener{
     
     //Para dibujar recordatorios en JPanel
-    public static int puntero = 0;
-    recordatoriosVista vista;
-    agregarRecordatorio addVista;
-    controladorMain main;
+    private static int puntero = 0;
+    private RecordatoriosVista vista;
+    private AgregarRecordatorio addVista;
+    private ControladorMain main;
     
     RecordatoriosActivity activity;
 
-    public controladorRecordatorios(controladorMain main){
-        this.vista = new recordatoriosVista();
-        this.addVista = new agregarRecordatorio();
+    public ControladorRecordatorios(ControladorMain main){
+        this.vista = new RecordatoriosVista();
+        this.addVista = new AgregarRecordatorio();
         this.activity = new RecordatoriosActivity();
         this.main = main;
     }
@@ -31,7 +31,7 @@ public class controladorRecordatorios implements ActionListener{
         this.main.setMain(vista);
         this.vista.add.addActionListener(this);
         this.addVista.agregar.addActionListener(this);
-        this.actualizarVistaListado(); //Si hay recordatorios guardados
+        //this.actualizarVistaListado(); //Si hay recordatorios guardados
     }
     
     public boolean verifyInput(){
@@ -52,7 +52,7 @@ public class controladorRecordatorios implements ActionListener{
     
     public void dibujarRecordatorio(Recordatorio nw){
         //Dibujamos recordatorio y agregamo listeners para sus botones
-        recordatorioUnit recordDraw = new recordatorioUnit(nw);
+        RecordatorioUnit recordDraw = new RecordatorioUnit(nw);
         
         recordDraw.checkButton.addActionListener((ActionEvent e) -> {
             activity.checkRecordatorio(recordDraw.info);

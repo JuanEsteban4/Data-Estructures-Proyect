@@ -10,12 +10,12 @@ import java.util.Date;
  *
  * @author juane
  */
-public class agregarRecordatorio extends javax.swing.JDialog {
+public class AgregarRecordatorio extends javax.swing.JDialog {
 
     /**
      * Creates new form agregarRecordatorio
      */
-    public agregarRecordatorio() {
+    public AgregarRecordatorio() {
         initComponents();
         fecha.setMinSelectableDate(new Date());
     }

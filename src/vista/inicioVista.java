@@ -8,12 +8,12 @@ package vista;
  *
  * @author juane
  */
-public class inicioVista extends javax.swing.JPanel {
+public class InicioVista extends javax.swing.JPanel {
 
     /**
      * Creates new form inicio
      */
-    public inicioVista() {
+    public InicioVista() {
         initComponents();
     }
 

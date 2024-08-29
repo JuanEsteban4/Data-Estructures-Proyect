@@ -1,6 +1,6 @@
 package vista;
 
-public class vista extends javax.swing.JFrame {
+public class Vista extends javax.swing.JFrame {
     
     //Valores de tamaño de ventana cambiar si se cambia diseño
     public final int height = 720;
@@ -10,7 +10,7 @@ public class vista extends javax.swing.JFrame {
     public final int heightMain = 720;
     public final int widthMain = 1280;
  
-    public vista() {
+    public Vista() {
         initComponents();
         this.setLocationRelativeTo(this);
         
@@ -28,6 +28,7 @@ public class vista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         main = new javax.swing.JPanel();
         recordatorios = new javax.swing.JButton();
+        asignaturas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StudentMate");
@@ -40,13 +41,20 @@ public class vista extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 0));
 
         main.setBackground(new java.awt.Color(255, 255, 255));
-        main.setLayout(new java.awt.GridLayout());
+        main.setLayout(new java.awt.GridLayout(1, 0));
         jScrollPane1.setViewportView(main);
 
         recordatorios.setText("Recordatorios");
         recordatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recordatoriosActionPerformed(evt);
+            }
+        });
+
+        asignaturas.setText("Asignaturas");
+        asignaturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asignaturasActionPerformed(evt);
             }
         });
 
@@ -58,13 +66,17 @@ public class vista extends javax.swing.JFrame {
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(recordatorios)
-                .addContainerGap(1095, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(asignaturas, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(928, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(recordatorios)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(recordatorios)
+                    .addComponent(asignaturas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -78,12 +90,17 @@ public class vista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_recordatoriosActionPerformed
 
+    private void asignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignaturasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_asignaturasActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton asignaturas;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel main;
     private javax.swing.JPanel menu;

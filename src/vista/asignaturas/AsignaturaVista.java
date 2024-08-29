@@ -2,18 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package vista.recordatorio;
+package vista.asignaturas;
 
-/**
- *
- * @author juane
- */
-public class RecordatoriosVista extends javax.swing.JPanel {
+
+public class AsignaturaVista extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public RecordatoriosVista() {
+    public AsignaturaVista() {
         initComponents();
     }
 
@@ -40,7 +37,7 @@ public class RecordatoriosVista extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Recordatorios");
+        jLabel1.setText("Asignaturas");
 
         add.setText("Agregar Recordatorio");
 

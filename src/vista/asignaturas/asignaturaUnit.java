@@ -1,18 +1,15 @@
-package vista.recordatorio;
+package vista.asignaturas;
 
 import java.awt.Color;
 import modelo.Recordatorio;
 
-public class RecordatorioUnit extends javax.swing.JPanel {
+public class AsignaturaUnit extends javax.swing.JPanel {
     
     public Recordatorio info;
     public final int WIDTH = 900;
     public final int HEIGHT = 180;
-    /**
-     * Creates new form recordatorio
-     * @param record
-     */
-    public RecordatorioUnit(Recordatorio record) {
+    
+    public AsignaturaUnit(Recordatorio record) {
         this.info = record;
         initComponents();
         updateInfo();
@@ -25,7 +22,7 @@ public class RecordatorioUnit extends javax.swing.JPanel {
         if(fecha.getText().isEmpty()) fecha.setVisible(false);
         if(info.isCompletado()) {
             this.setBackground(Color.CYAN);
-            this.checkButton.setBackground(Color.CYAN);
+            //this.checkButton.setBackground(Color.CYAN);
         }
     }
 
@@ -42,8 +39,9 @@ public class RecordatorioUnit extends javax.swing.JPanel {
         fecha = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
-        checkButton = new javax.swing.JButton();
+        addNoteButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        completeButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -66,12 +64,16 @@ public class RecordatorioUnit extends javax.swing.JPanel {
         descripcion.setEnabled(false);
         jScrollPane2.setViewportView(descripcion);
 
-        checkButton.setBackground(new java.awt.Color(255, 255, 255));
-        checkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkButton.png"))); // NOI18N
-        checkButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        checkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addNoteButton.setText("Agregar Calificación");
 
-        deleteButton.setText("Borrar");
+        deleteButton.setText("Eliminar");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        completeButton.setText("Completado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,41 +82,46 @@ public class RecordatorioUnit extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                        .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteButton)
-                        .addGap(47, 47, 47))))
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2)
+                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addNoteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(completeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(fecha)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fecha)
-                    .addComponent(deleteButton))
-                .addContainerGap())
+                        .addComponent(addNoteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(completeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteButton)
+                        .addGap(46, 46, 46))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton checkButton;
+    public javax.swing.JButton addNoteButton;
+    public javax.swing.JButton completeButton;
     public javax.swing.JButton deleteButton;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JLabel fecha;
