@@ -4,7 +4,6 @@
  */
 package vista.asignaturas;
 
-
 public class AsignaturaVista extends javax.swing.JPanel {
 
     /**
@@ -24,22 +23,22 @@ public class AsignaturaVista extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        recordatoriosLista = new javax.swing.JPanel();
+        asignaturasLista = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         add = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        recordatoriosLista.setBackground(new java.awt.Color(255, 255, 255));
-        recordatoriosLista.setPreferredSize(new java.awt.Dimension(0, 0));
-        recordatoriosLista.setLayout(null);
-        jScrollPane1.setViewportView(recordatoriosLista);
+        asignaturasLista.setBackground(new java.awt.Color(255, 255, 255));
+        asignaturasLista.setPreferredSize(new java.awt.Dimension(0, 0));
+        asignaturasLista.setLayout(null);
+        jScrollPane1.setViewportView(asignaturasLista);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Asignaturas");
+        jLabel1.setText("Asignatura");
 
-        add.setText("Agregar Recordatorio");
+        add.setText("Agregar Asignatura");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,7 +53,7 @@ public class AsignaturaVista extends javax.swing.JPanel {
                         .addGap(45, 45, 45)
                         .addComponent(add))
                     .addComponent(jLabel1))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,8 +72,8 @@ public class AsignaturaVista extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton add;
+    public javax.swing.JPanel asignaturasLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JPanel recordatoriosLista;
     // End of variables declaration//GEN-END:variables
 }

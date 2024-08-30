@@ -8,10 +8,7 @@ public class RecordatorioUnit extends javax.swing.JPanel {
     public Recordatorio info;
     public final int WIDTH = 900;
     public final int HEIGHT = 180;
-    /**
-     * Creates new form recordatorio
-     * @param record
-     */
+   
     public RecordatorioUnit(Recordatorio record) {
         this.info = record;
         initComponents();
@@ -21,11 +18,16 @@ public class RecordatorioUnit extends javax.swing.JPanel {
     public void updateInfo(){
         titulo.setText(info.getTitulo());
         descripcion.setText(info.getDescripcion());
-        fecha.setText(info.getFechaHora() == null ? "" : info.getFechaHora().toString());
+        fecha.setText(info.getFechaHora() == null ? "" : info.getFechaHora().toString().substring(0, 10));
         if(fecha.getText().isEmpty()) fecha.setVisible(false);
         if(info.isCompletado()) {
-            this.setBackground(Color.CYAN);
-            this.checkButton.setBackground(Color.CYAN);
+            this.setBackground(Color.getHSBColor(125 / 360.0f,0.25f ,0.92f));
+            this.checkButton.setBackground(Color.getHSBColor(125 / 360.0f,0.25f ,0.92f));
+            checkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/notcheckButton.png")));
+        }else {
+            this.setBackground(Color.WHITE);
+            this.checkButton.setBackground(Color.WHITE);
+            checkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkButton.png")));
         }
     }
 

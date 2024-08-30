@@ -62,7 +62,7 @@ public class RecordatoriosActivity{
     }
     
     public void checkRecordatorio(Recordatorio record){
-        record.setCompletado(true);
+        record.setCompletado(!record.isCompletado());
     }
     
     public void printRecordatorios(){

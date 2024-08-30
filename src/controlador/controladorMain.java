@@ -41,17 +41,24 @@ public class ControladorMain implements ActionListener{
         
     }
     
-    //Metodos de los controladore para guardar
+    //Metodos de los controladores para guardar
     private void save(){
         this.controlRecordatorios.save();
+    }
+    
+    private void clearAdd(){
+        controlRecordatorios.cerrarAddVista();
+        controlAsignaturas.cerrarVistaAdd();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == vista.recordatorios){
+            clearAdd();
             controlRecordatorios.init();
         }
         if(e.getSource() == vista.asignaturas){
+            clearAdd();
             controlAsignaturas.init();
         }
         

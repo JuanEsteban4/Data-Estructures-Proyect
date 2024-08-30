@@ -1,23 +1,13 @@
 package app;
-
-import functions.AsignaturasActivity;
-import functions.RecordatoriosActivity;
-import java.util.Scanner;
-import modelo.Asignatura;
-import modelo.Recordatorio;
 import controlador.ControladorMain;
 
 public class Main {
-    
-    private RecordatoriosActivity RA = new RecordatoriosActivity();
-    private AsignaturasActivity AA = new AsignaturasActivity();
-    
-    Scanner leer = new Scanner(System.in);
     
     public static void main(String[] args){
         new ControladorMain().init();
     }
     
+    /*
     public void app(){
         int opc;
         do{
@@ -169,6 +159,6 @@ public class Main {
                            """);
     }
     
-    
+    */
     
 }

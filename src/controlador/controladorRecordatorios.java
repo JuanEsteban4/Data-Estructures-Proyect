@@ -14,9 +14,9 @@ public class ControladorRecordatorios implements ActionListener{
     
     //Para dibujar recordatorios en JPanel
     private static int puntero = 0;
-    private RecordatoriosVista vista;
-    private AgregarRecordatorio addVista;
-    private ControladorMain main;
+    private final RecordatoriosVista vista;
+    private final AgregarRecordatorio addVista;
+    private final ControladorMain main;
     
     RecordatoriosActivity activity;
 
@@ -31,7 +31,9 @@ public class ControladorRecordatorios implements ActionListener{
         this.main.setMain(vista);
         this.vista.add.addActionListener(this);
         this.addVista.agregar.addActionListener(this);
-        //this.actualizarVistaListado(); //Si hay recordatorios guardados
+        this.vista.orden.addActionListener(this);
+        activity.ordenarPorFechaIngreso(); //Orden inicial
+        this.actualizarVistaListado(); //Si hay recordatorios guardados
     }
     
     public boolean verifyInput(){
@@ -42,16 +44,20 @@ public class ControladorRecordatorios implements ActionListener{
         return true;                                  
     }
     
+    public void cerrarAddVista(){
+        this.addVista.dispose();
+    }
+    
     public void agregarRecordatorio(Recordatorio nw){
         //Agregamos al listado, limpiamos los inputs y cerramos ventana de agregar
         activity.addRecordatorio(nw);
         limpiarVistaAdd();
-        this.addVista.dispose();
+        cerrarAddVista();
         dibujarRecordatorio(nw);
     }
     
     public void dibujarRecordatorio(Recordatorio nw){
-        //Dibujamos recordatorio y agregamo listeners para sus botones
+        //Dibujamos recordatorio y agregamos listeners para sus botones
         RecordatorioUnit recordDraw = new RecordatorioUnit(nw);
         
         recordDraw.checkButton.addActionListener((ActionEvent e) -> {
@@ -104,6 +110,7 @@ public class ControladorRecordatorios implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         if(e.getSource() == this.vista.add){
             this.addVista.setLocationRelativeTo(null);
             this.addVista.setVisible(true);
@@ -113,6 +120,21 @@ public class ControladorRecordatorios implements ActionListener{
             agregarRecordatorio(new Recordatorio(this.addVista.titulo.getText(),
                                                  this.addVista.descripcion.getText(),
                                                  this.addVista.fecha.getDate()));
+        }
+        if(e.getSource() == this.vista.orden){
+            int opc = this.vista.orden.getSelectedIndex();
+            System.out.println(opc);
+            if(opc == 0){
+                activity.ordenarPorFechaIngreso();
+            }
+            if(opc == 1){
+                activity.ordenarPorTitulo();
+            }
+            if(opc == 2){
+                activity.ordenarPorFecha();
+            }
+            
+            actualizarVistaListado();
         }
     }
 }

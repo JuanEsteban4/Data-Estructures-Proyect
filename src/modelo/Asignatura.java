@@ -6,12 +6,14 @@ public class Asignatura implements Comparable<Asignatura>{
     private String codigo;
     private String profesor;
     private int creditos;
+    private String edificio;
 
-    public Asignatura(String nombre, String codigo, String profesor, int creditos) {
+    public Asignatura(String nombre, String codigo, String profesor, int creditos,String edificio) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.profesor = profesor;
         this.creditos = creditos;
+        this.edificio = edificio;
     }
     
     public String getNombre() {
@@ -44,6 +46,14 @@ public class Asignatura implements Comparable<Asignatura>{
 
     public void setCreditos(int creditos) {
         this.creditos = creditos;
+    }
+
+    public String getEdificio() {
+        return edificio;
+    }
+
+    public void setEdificio(String edificio) {
+        this.edificio = edificio;
     }
     
     @Override
