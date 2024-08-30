@@ -1,6 +1,10 @@
 package DataEstructures;
-// Clase Node representa un nodo en el árbol AVL
-class Node {
+
+
+public class AVL {
+    
+    // Clase Node representa un nodo en el árbol AVL
+ class Node {
 
     int key;        // Valor clave del nodo
     int count;      // Contador de ocurrencias del nodo
@@ -15,8 +19,6 @@ class Node {
         height = 1; // La altura del nodo recién creado es 1
     }
 }
-
-public class AVL {
 
     // Función auxiliar para obtener la altura de un nodo en el árbol
     static int height(Node N) {
@@ -69,7 +71,7 @@ public class AVL {
     }
 
     // Función para insertar un nuevo nodo en el árbol AVL
-    public static Node insert(Node node, int key) {
+    public Node insert(Node node, int key) {
         // Caso base: si el nodo es nulo, crear un nuevo nodo
         if (node == null) {
             return new Node(key);
