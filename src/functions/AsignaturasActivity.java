@@ -3,10 +3,12 @@ package functions;
 import DataEstructures.LinkedList;
 import java.util.ArrayList;
 import modelo.Asignatura;
-
+import DataEstructures.AVL; 
 public class AsignaturasActivity  {
     
     private ArrayList<Asignatura> listadoAsignaturas;
+    private AVL asignaturasAVL = new AVL();
+    
     
     public AsignaturasActivity() {
         this.listadoAsignaturas = new ArrayList<>();
@@ -27,6 +29,14 @@ public class AsignaturasActivity  {
     
     //Metodo para buscar una asignatura por su codigo
      public Asignatura buscarAsignaturaPorCodigo(String codigo) {
-       return null;
-    }
+         for(Asignatura i: listadoAsignaturas){
+             asignaturasAVL.insertAVL(i);
+             
+         }
+         System.out.println(codigo);
+         return asignaturasAVL.findAVL(Integer.parseInt(codigo));
+         }
+    
+     
+   
 }
