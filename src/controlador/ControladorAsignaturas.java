@@ -13,16 +13,20 @@ import vista.asignaturas.*;
 public class ControladorAsignaturas implements ActionListener{
     //Para dibujar JPanel
     public static int puntero = 0;
-    private AsignaturaVista vista;
-    private ControladorMain main;
-    private AgregarAsignatura add;
-    private AsignaturasActivity activity;
+    private final AsignaturaVista vista;
+    private final ControladorMain main;
+    private final AgregarAsignatura add;
+    private final AsignaturasActivity activity;
+    private final AsignaturaNotas notas;
     
     public ControladorAsignaturas(ControladorMain main){
         this.main = main;
         this.activity = new AsignaturasActivity();
         this.vista = new AsignaturaVista();
         this.add = new AgregarAsignatura();
+        this.notas = new AsignaturaNotas();
+        this.vista.buscar.setEnabled(false);
+        this.vista.restablecer.setVisible(false);
     }
     
     public void init(){
@@ -30,10 +34,19 @@ public class ControladorAsignaturas implements ActionListener{
         
         this.vista.add.addActionListener(this);
         this.add.agregar.addActionListener(this);
+        this.vista.buscar.addActionListener(this);
+        this.vista.restablecer.addActionListener(this);
+        
+        this.actualizarVistaListado();
+    }
+    
+    public void save(){
+        this.activity.saveAsignaturas();
     }
     
     public void cerrarVistaAdd(){
         this.add.dispose();
+        this.notas.dispose();
     }
     
     public void limpiarVistaAdd(){
@@ -97,6 +110,13 @@ public class ControladorAsignaturas implements ActionListener{
             Integer.valueOf(this.add.creditos.getText());
         }catch(NumberFormatException e){
             this.add.creditosWarn.setVisible(true);
+            result = false;
+        }
+        
+        try{
+            Integer.valueOf(this.add.codigo.getText());
+        }catch(NumberFormatException e){
+            this.add.codigoWarn.setVisible(true);
         }
         return result;
     }
@@ -106,8 +126,7 @@ public class ControladorAsignaturas implements ActionListener{
         AsignaturaUnit dibujo = new AsignaturaUnit(s);
         
         dibujo.addNoteButton.addActionListener((ActionEvent e) -> {
-            
-           
+            new AsignaturaNotas().init(s);
         });
         
         dibujo.deleteButton.addActionListener((ActionEvent e) -> {
@@ -128,6 +147,21 @@ public class ControladorAsignaturas implements ActionListener{
         puntero++;
     }
     
+    public void buscarAsignatura(){
+        System.out.println("Hala");
+        Asignatura s = activity.buscarAsignaturaPorCodigo(this.vista.codigo.getText());
+        if(s == null){
+            JOptionPane.showMessageDialog(null, "No se ha encontrado asignatura", "No resultados", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        this.vista.restablecer.setVisible(true);
+        this.vista.asignaturasLista.removeAll();
+        puntero = 0;
+        dibujarAsignatura(s);
+        repaint();
+        System.out.println("Hala");
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.vista.add){
@@ -145,6 +179,13 @@ public class ControladorAsignaturas implements ActionListener{
             
             limpiarVistaAdd();
             cerrarVistaAdd();
+        }
+        if(e.getSource() == this.vista.buscar){
+            buscarAsignatura();
+        }
+        if(e.getSource() == this.vista.restablecer){
+            this.vista.codigo.setText("");
+            this.actualizarVistaListado();
         }
     }    
 }

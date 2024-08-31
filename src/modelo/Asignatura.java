@@ -1,4 +1,5 @@
 package modelo;
+import java.util.ArrayList;
 
 public class Asignatura implements Comparable<Asignatura>{
     
@@ -7,6 +8,7 @@ public class Asignatura implements Comparable<Asignatura>{
     private String profesor;
     private int creditos;
     private String edificio;
+    private ArrayList<Nota> notas;
 
     public Asignatura(String nombre, String codigo, String profesor, int creditos,String edificio) {
         this.nombre = nombre;
@@ -14,6 +16,7 @@ public class Asignatura implements Comparable<Asignatura>{
         this.profesor = profesor;
         this.creditos = creditos;
         this.edificio = edificio;
+        this.notas = new ArrayList();
     }
     
     public String getNombre() {
@@ -55,7 +58,15 @@ public class Asignatura implements Comparable<Asignatura>{
     public void setEdificio(String edificio) {
         this.edificio = edificio;
     }
-    
+
+    public ArrayList<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(ArrayList<Nota> notas) {
+        this.notas = notas;
+    }
+
     @Override
     public String toString() {
         return "Asignatura{" +
