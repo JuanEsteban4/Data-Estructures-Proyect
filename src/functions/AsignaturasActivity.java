@@ -1,15 +1,30 @@
 package functions;
 
-import DataEstructures.LinkedList;
 import java.util.ArrayList;
 import modelo.Asignatura;
-
+import DataEstructures.AVL; 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 public class AsignaturasActivity  {
     
     private ArrayList<Asignatura> listadoAsignaturas;
+    private AVL asignaturasAVL = new AVL();
+    
     
     public AsignaturasActivity() {
+        loadAsignaturas();
+        if(this.listadoAsignaturas == null){
         this.listadoAsignaturas = new ArrayList<>();
+        }else{
+            for(Asignatura asignatura:this.listadoAsignaturas){
+                asignaturasAVL.insertAVL(asignatura);
+            }
+        }
+
     }
     public ArrayList<Asignatura> getListado(){
         return listadoAsignaturas;
@@ -17,6 +32,7 @@ public class AsignaturasActivity  {
     //Metodo para agregar una asignatura
     public void agregarAsignatura(Asignatura asignatura) {
         listadoAsignaturas.add(asignatura);
+        asignaturasAVL.insertAVL(asignatura);
     }
 
     //Metodo para eliminar una asignatura por su codigo
@@ -27,6 +43,30 @@ public class AsignaturasActivity  {
     
     //Metodo para buscar una asignatura por su codigo
      public Asignatura buscarAsignaturaPorCodigo(String codigo) {
-       return null;
+         /*for(Asignatura asignatura: this.listadoAsignaturas){
+             asignaturasAVL.insertAVL(asignatura);
+         }*/
+         return asignaturasAVL.findAVL(Integer.parseInt(codigo));
+         }
+    
+    public void saveAsignaturas(){
+        try (FileWriter writer = new FileWriter("resources\\asignaturas.json")) {
+            Gson gson = new Gson();
+            gson.toJson(listadoAsignaturas, writer);
+        } catch (IOException e) {
+            System.out.println("Error al abrir el archivo");
+        }
+        
+    }
+    
+    private void loadAsignaturas(){
+        try (FileReader reader = new FileReader("resources\\asignaturas.json")) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<ArrayList<Asignatura>>(){}.getType();
+            this.listadoAsignaturas = gson.fromJson(reader, tipoLista);
+        } catch (IOException e) {
+            System.out.println("Error cargando Asignaturas");
+        }
+
     }
 }
