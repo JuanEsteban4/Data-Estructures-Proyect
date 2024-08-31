@@ -1,9 +1,8 @@
 package DataEstructures;
 
-
-
 import java.io.IOException;
 import java.util.Date;
+import modelo.Asignatura;
 import modelo.Recordatorio;
 
 public class Heap {
@@ -113,10 +112,61 @@ public class Heap {
         }
     }
 
+    // Método estático para realizar heap sort en un array de Asignaturas
+    public static Asignatura[] heapSort(Asignatura[] asignaturas) {
+        int n = asignaturas.length;
+
+        // Construir el heap (reorganizar el array)
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(asignaturas, n, i);
+        }
+
+        // Extraer elementos del heap uno por uno
+        for (int i = n - 1; i > 0; i--) {
+            // Mover la raíz actual al final
+            Asignatura temp = asignaturas[0];
+            asignaturas[0] = asignaturas[i];
+            asignaturas[i] = temp;
+
+            // Llamar a heapify en el heap reducido
+            heapify(asignaturas, i, 0);
+        }
+
+        return asignaturas;
+    }
+
+    // Función para hacer heapify de un subárbol con nodo raíz i en array de Asignaturas
+    private static void heapify(Asignatura[] asignaturas, int n, int i) {
+        int largest = i; // Inicializar el más grande como raíz
+        int left = 2 * i + 1; // Hijo izquierdo
+        int right = 2 * i + 2; // Hijo derecho
+
+        // Si el hijo izquierdo es más grande que la raíz
+        if (left < n && asignaturas[left].compareTo(asignaturas[largest]) > 0) {
+            largest = left;
+        }
+
+        // Si el hijo derecho es más grande que el más grande hasta ahora
+        if (right < n && asignaturas[right].compareTo(asignaturas[largest]) > 0) {
+            largest = right;
+        }
+
+        // Si el más grande no es la raíz
+        if (largest != i) {
+            Asignatura swap = asignaturas[i];
+            asignaturas[i] = asignaturas[largest];
+            asignaturas[largest] = swap;
+
+            // Recursivamente heapify el subárbol afectado
+            heapify(asignaturas, n, largest);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         // Crear un MinHeap con capacidad para 10 recordatorios y con 3 hijos por nodo.
         MinHeap minHeap = new MinHeap(10, 3);
 
+        /*
         // Crear algunos recordatorios con diferentes fechas para agregar al heap
         Recordatorio r1 = new Recordatorio("Tarea 1", "Descripcion 1", new Date(2024, 8, 1));
         Recordatorio r2 = new Recordatorio("Tarea 2", "Descripcion 2", new Date(2024, 7, 1));
@@ -131,14 +181,33 @@ public class Heap {
         minHeap.add(r4);
         minHeap.add(r5);
 
-        // Obtener los primeros 3 elementos en orden de prioridad sin eliminarlos
-        Recordatorio[] topRecordatorios = minHeap.peekMultiple(5);
-
-        // Mostrar los elementos obtenidos
-        System.out.println("Los recordatorios con mayor prioridad son:");
-        for (Recordatorio recordatorio : topRecordatorios) {
-            System.out.println(recordatorio);
-        }
         
+        // Obtener y mostrar los tres primeros recordatorios
+        System.out.println("Los tres primeros recordatorios son:");
+        Recordatorio[] top3 = minHeap.peekMultiple(3);
+        for (Recordatorio r : top3) {
+            System.out.println(r.getTitulo() + " - Fecha: " + r.getFechaHora());
+        }
+
+        System.out.println("-----------------------------------------------------");
+ 
+        */
+        //ASIGNATURTAS
+        Asignatura[] asignaturas = {
+            new Asignatura("Matematicas", "101", "Dr. Garcia", 5, "Edificio A"),
+            new Asignatura("Fisica", "202", "Dra. Lopez", 4, "Edificio B"),
+            new Asignatura("Quimica", "303", "Dr. Martinez", 6, "Edificio C"),
+            new Asignatura("Biologia", "404", "Dr. Perez", 3, "Edificio D"),
+            new Asignatura("Historia", "505", "Dra. Sanchez", 2, "Edificio E")
+        };
+
+        // Ordenar las asignaturas utilizando heap sort
+        Asignatura[] asignaturasOrdenadas = heapSort(asignaturas);
+
+        // Mostrar las asignaturas ordenadas por número de créditos
+        System.out.println("Asignaturas ordenadas por creditos:");
+        for (Asignatura asignatura : asignaturasOrdenadas) {
+            System.out.println(asignatura);
+        }
     }
 }
