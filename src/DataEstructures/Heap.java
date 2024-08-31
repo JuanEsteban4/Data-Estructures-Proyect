@@ -211,7 +211,7 @@ public class Heap {
 
         System.out.println("-----------------------------------------------------");
 
-        // Ordenar las asignaturas por primera letra del nombre
+        // Ordenar las asignaturas por primera letra del nombre.
         Asignatura[] asignaturasOrdenadasPorNombre = heapSort(asignaturas, Asignatura.CompareNombre);
         System.out.println("Asignaturas ordenadas por nombre:");
         for (Asignatura asignatura : asignaturasOrdenadasPorNombre) {
