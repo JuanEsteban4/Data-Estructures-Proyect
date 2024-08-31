@@ -1,6 +1,8 @@
 package modelo;
 
-public class Asignatura implements Comparable<Asignatura>{
+import java.util.Comparator;
+
+public class Asignatura{
     
     private String nombre;
     private String codigo;
@@ -66,9 +68,24 @@ public class Asignatura implements Comparable<Asignatura>{
                 '}';
     }
 
-    @Override
-    public int compareTo(Asignatura o) {
-        return this.codigo.compareTo(o.getCodigo());
-    }
+    //Compare para la comparacion por codigo
+    public static Comparator<Asignatura> CompareCodigo = new Comparator<Asignatura>() {
+        @Override
+        public int compare(Asignatura a1, Asignatura a2) {
+            return a1.codigo.compareTo(a2.codigo);
+        }
+    };
 
+    //Compare para la comparacion de la primera letra del nombre de la asignatura
+    public static Comparator<Asignatura> CompareNombre = new Comparator<Asignatura>() {
+        @Override
+        public int compare(Asignatura a1, Asignatura a2) {
+        // Obtener la primera letra de cada nombre
+        char letra1 = a1.nombre.charAt(0);
+        char letra2 = a2.nombre.charAt(0);
+
+        // Comparar las letras
+        return Character.compare(letra1, letra2);
+        }
+    };
 }
