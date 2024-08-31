@@ -68,12 +68,7 @@ public class Asignatura implements Comparable<Asignatura>{
 
     @Override
     public int compareTo(Asignatura o) {
-        if(this.creditos > o.getCreditos()){
-            return 1;
-        }else if(this.creditos < o.getCreditos()){
-            return -1;
-        }else{
-            return 0;
-        }
+        return this.codigo.compareTo(o.getCodigo());
     }
+
 }
