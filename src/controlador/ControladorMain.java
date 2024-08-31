@@ -44,6 +44,7 @@ public class ControladorMain implements ActionListener{
     //Metodos de los controladores para guardar
     private void save(){
         this.controlRecordatorios.save();
+        this.controlAsignaturas.save();
     }
     
     private void clearAdd(){

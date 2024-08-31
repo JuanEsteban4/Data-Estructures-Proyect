@@ -1,24 +1,27 @@
 package DataEstructures;
 
+import modelo.Asignatura;
 
 public class AVL {
-    
+
+    Node root;
+
     // Clase Node representa un nodo en el árbol AVL
- class Node {
+    class Node {
 
-    int key;        // Valor clave del nodo
-    int count;      // Contador de ocurrencias del nodo
-    Node left, right;  // Referencias a los hijos izquierdo y derecho
-    int height;     // Altura del nodo en el árbol
+        Asignatura asignatura; // Objeto de tipo Asignatura
+        int count; // Contador de ocurrencias del nodo
+        Node left, right; // Referencias a los hijos izquierdo y derecho
+        int height; // Altura del nodo en el árbol
 
-    // Constructor que inicializa un nodo con un valor específico
-    Node(int k) {
-        key = k;
-        count = 1; // Inicialmente, el nodo aparece una vez
-        left = right = null; // Los hijos son nulos al inicio
-        height = 1; // La altura del nodo recién creado es 1
+        // Constructor que inicializa un nodo con un objeto Asignatura
+        Node(Asignatura asignatura) {
+            this.asignatura = asignatura;
+            count = 1; // Inicialmente, el nodo aparece una vez
+            left = right = null; // Los hijos son nulos al inicio
+            height = 1; // La altura del nodo recién creado es 1
+        }
     }
-}
 
     // Función auxiliar para obtener la altura de un nodo en el árbol
     static int height(Node N) {
@@ -70,55 +73,131 @@ public class AVL {
         return height(N.left) - height(N.right); // El balance es la diferencia de alturas entre los hijos izquierdo y derecho
     }
 
-    // Función para insertar un nuevo nodo en el árbol AVL
-    public Node insert(Node node, int key) {
-        // Caso base: si el nodo es nulo, crear un nuevo nodo
+    // Método para insertar un nodo en el árbol AVL
+    public int insertAVL(Asignatura key) {
+        root = insert(root, key); // Actualiza la raíz con el resultado de la inserción
+        return Integer.parseInt(key.getCodigo());
+    }
+
+    // Función para insertar un nodo en el árbol AVL
+    public Node insert(Node node, Asignatura asignatura) {
         if (node == null) {
-            return new Node(key);
+            return new Node(asignatura);
         }
 
-        // Si la clave es menor, insertar en el subárbol izquierdo
-        if (key < node.key) {
-            node.left = insert(node.left, key);
-        } // Si la clave es mayor, insertar en el subárbol derecho
-        else if (key > node.key) {
-            node.right = insert(node.right, key);
+        // Comparar por el código de Asignatura
+        if (Integer.parseInt(asignatura.getCodigo()) < Integer.parseInt(node.asignatura.getCodigo())) {
+            node.left = insert(node.left, asignatura);
+        } else if (Integer.parseInt(asignatura.getCodigo()) > Integer.parseInt(node.asignatura.getCodigo())) {
+            node.right = insert(node.right, asignatura);
         } else {
-            // Si la clave ya existe, incrementar el contador de ocurrencias
             node.count++;
             return node;
         }
 
-        // Actualizar la altura del nodo antecesor
         node.height = Math.max(height(node.left), height(node.right)) + 1;
-
-        // Obtener el factor de balance para verificar si el nodo se ha desbalanceado
         int balance = getBalance(node);
 
-        // Caso Izquierda-Izquierda (LL): si el subárbol izquierdo está desbalanceado y la clave está en el subárbol izquierdo
-        if (balance > 1 && key < node.left.key) {
+        if (balance > 1 && Integer.parseInt(asignatura.getCodigo()) < Integer.parseInt(node.left.asignatura.getCodigo())) {
             return rightRotate(node);
         }
 
-        // Caso Derecha-Derecha (RR): si el subárbol derecho está desbalanceado y la clave está en el subárbol derecho
-        if (balance < -1 && key > node.right.key) {
+        if (balance < -1 && Integer.parseInt(asignatura.getCodigo()) > Integer.parseInt(node.right.asignatura.getCodigo())) {
             return leftRotate(node);
         }
 
-        // Caso Izquierda-Derecha (LR): si el subárbol izquierdo está desbalanceado y la clave está en el subárbol derecho del hijo izquierdo
-        if (balance > 1 && key > node.left.key) {
+        if (balance > 1 && Integer.parseInt(asignatura.getCodigo()) > Integer.parseInt(node.left.asignatura.getCodigo())) {
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
 
-        // Caso Derecha-Izquierda (RL): si el subárbol derecho está desbalanceado y la clave está en el subárbol izquierdo del hijo derecho
-        if (balance < -1 && key < node.right.key) {
+        if (balance < -1 && Integer.parseInt(asignatura.getCodigo()) < Integer.parseInt(node.right.asignatura.getCodigo())) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
         }
 
-        // Retornar el nodo sin modificaciones si no hay desbalanceo
         return node;
+    }
+
+    // Método para eliminar un nodo del árbol AVL
+    public Node deleteNode(Node root, int codigo) {
+        if (root == null) {
+            return root;
+        }
+
+        if (codigo < Integer.parseInt(root.asignatura.getCodigo())) {
+            root.left = deleteNode(root.left, codigo);
+        } else if (codigo > Integer.parseInt(root.asignatura.getCodigo())) {
+            root.right = deleteNode(root.right, codigo);
+        } else {
+            if (root.count > 1) {
+                root.count--;
+                return root;
+            }
+
+            if ((root.left == null) || (root.right == null)) {
+                Node temp = root.left != null ? root.left : root.right;
+                if (temp == null) {
+                    temp = root;
+                    root = null;
+                } else {
+                    root = temp;
+                }
+            } else {
+                Node temp = minValueNode(root.right);
+                root.asignatura = temp.asignatura;
+                root.count = temp.count;
+                temp.count = 1;
+                root.right = deleteNode(root.right, Integer.parseInt(temp.asignatura.getCodigo()));
+            }
+        }
+
+        if (root == null) {
+            return root;
+        }
+
+        root.height = Math.max(height(root.left), height(root.right)) + 1;
+        int balance = getBalance(root);
+
+        if (balance > 1 && getBalance(root.left) >= 0) {
+            return rightRotate(root);
+        }
+
+        if (balance > 1 && getBalance(root.left) < 0) {
+            root.left = leftRotate(root.left);
+            return rightRotate(root);
+        }
+
+        if (balance < -1 && getBalance(root.right) <= 0) {
+            return leftRotate(root);
+        }
+
+        if (balance < -1 && getBalance(root.right) > 0) {
+            root.right = rightRotate(root.right);
+            return leftRotate(root);
+        }
+
+        return root;
+    }
+
+    // Método para eliminar un nodo del árbol AVL
+    public void deleteAVL(int codigo) {
+        root = deleteNode(root, codigo); // Actualiza la raíz después de la eliminación
+    }
+
+    // Función para encontrar un nodo en el árbol AVL
+    public Node find(Node root, int codigo) {
+        if (root == null) {
+            return null;
+        }
+
+        if (codigo < Integer.parseInt(root.asignatura.getCodigo())) {
+            return find(root.left, codigo);
+        } else if (codigo > Integer.parseInt(root.asignatura.getCodigo())) {
+            return find(root.right, codigo);
+        } else {
+            return root;
+        }
     }
 
     // Función para obtener el nodo con el valor mínimo en el árbol
@@ -133,97 +212,18 @@ public class AVL {
         return current; // Retorna el nodo con el valor mínimo
     }
 
-    // Función recursiva para eliminar un nodo con una clave dada
-    public static Node deleteNode(Node root, int key) {
-        // Realizar la eliminación estándar de un nodo en BST
-        if (root == null) {
-            return root;
-        }
-
-        // Si la clave a eliminar es menor que la clave de la raíz, va al subárbol izquierdo
-        if (key < root.key) {
-            root.left = deleteNode(root.left, key);
-        } // Si la clave a eliminar es mayor que la clave de la raíz, va al subárbol derecho
-        else if (key > root.key) {
-            root.right = deleteNode(root.right, key);
-        } // Si la clave es igual a la clave de la raíz, este es el nodo a eliminar
-        else {
-            // Si el nodo tiene más de una ocurrencia, disminuir el contador
-            if (root.count > 1) {
-                root.count--;
-                return root; // Retorna el nodo con el contador decrementado
-            }
-
-            // Caso de nodo con un solo hijo o sin hijos
-            if ((root.left == null) || (root.right == null)) {
-                Node temp = root.left != null ? root.left : root.right;
-
-                // Caso sin hijos
-                if (temp == null) {
-                    temp = root;
-                    root = null;
-                } else // Caso de un solo hijo
-                {
-                    root = temp; // Copiar los contenidos del hijo no nulo
-                }
-            } else {
-                // Nodo con dos hijos: obtener el sucesor en orden (mínimo en el subárbol derecho)
-                Node temp = minValueNode(root.right);
-
-                // Copiar los datos del sucesor en orden a este nodo
-                root.key = temp.key;
-                root.count = temp.count;
-                temp.count = 1;
-
-                // Eliminar el sucesor en orden
-                root.right = deleteNode(root.right, temp.key);
-            }
-        }
-
-        // Si el árbol tenía solo un nodo, retornarlo
-        if (root == null) {
-            return root;
-        }
-
-        // Actualizar la altura del nodo actual
-        root.height = Math.max(height(root.left), height(root.right)) + 1;
-
-        // Obtener el factor de balance del nodo actual para verificar si está desbalanceado
-        int balance = getBalance(root);
-
-        // Realizar las rotaciones necesarias según el tipo de desbalanceo
-        // Caso Izquierda-Izquierda (LL)
-        if (balance > 1 && getBalance(root.left) >= 0) {
-            return rightRotate(root);
-        }
-
-        // Caso Izquierda-Derecha (LR)
-        if (balance > 1 && getBalance(root.left) < 0) {
-            root.left = leftRotate(root.left);
-            return rightRotate(root);
-        }
-
-        // Caso Derecha-Derecha (RR)
-        if (balance < -1 && getBalance(root.right) <= 0) {
-            return leftRotate(root);
-        }
-
-        // Caso Derecha-Izquierda (RL)
-        if (balance < -1 && getBalance(root.right) > 0) {
-            root.right = rightRotate(root.right);
-            return leftRotate(root);
-        }
-
-        return root; // Retornar la raíz del subárbol modificado
-    }
-
     // Función para imprimir el recorrido en preorden del árbol
     public static void preOrder(Node root) {
         if (root != null) {
-            System.out.print(root.key + "(" + root.count + ") ");
+            System.out.print(root.asignatura.getCodigo() + "(" + root.count + ") ");
             preOrder(root.left);
             preOrder(root.right);
         }
     }
 
+    // Método para encontrar una Asignatura en el árbol AVL
+    public Asignatura findAVL(int key) {
+        Node codigo = find(root, key);
+        return codigo != null ? codigo.asignatura : null; // Manejo del caso nulo
+    }
 }
