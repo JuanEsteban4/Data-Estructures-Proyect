@@ -3,6 +3,7 @@ package functions;
 import java.util.ArrayList;
 import modelo.Asignatura;
 import DataEstructures.AVL; 
+import DataEstructures.Heap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
@@ -13,7 +14,7 @@ public class AsignaturasActivity  {
     
     private ArrayList<Asignatura> listadoAsignaturas;
     private AVL asignaturasAVL = new AVL();
-    
+    public Asignatura[] orden;
     
     public AsignaturasActivity() {
         loadAsignaturas();
@@ -43,12 +44,28 @@ public class AsignaturasActivity  {
     
     //Metodo para buscar una asignatura por su codigo
      public Asignatura buscarAsignaturaPorCodigo(String codigo) {
-         /*for(Asignatura asignatura: this.listadoAsignaturas){
-             asignaturasAVL.insertAVL(asignatura);
-         }*/
          return asignaturasAVL.findAVL(Integer.parseInt(codigo));
          }
     
+    public void ordenarAsignaturaByCodigo(){
+        Object[] objetos = this.listadoAsignaturas.toArray();
+        Asignatura[] asignaturas = new Asignatura[objetos.length];
+
+        for (int i = 0; i < objetos.length; i++) {
+            asignaturas[i] = (Asignatura) objetos[i];
+        }
+        this.orden = Heap.heapSort(asignaturas, Asignatura.CompareCodigo);
+    }
+    
+    public void ordenarAsignaturaByNombre(){
+        Object[] objetos = this.listadoAsignaturas.toArray();
+        Asignatura[] asignaturas = new Asignatura[objetos.length];
+
+        for (int i = 0; i < objetos.length; i++) {
+            asignaturas[i] = (Asignatura) objetos[i];
+        }
+        this.orden = Heap.heapSort(asignaturas, Asignatura.CompareNombre);
+    }
     public void saveAsignaturas(){
         try (FileWriter writer = new FileWriter("resources\\asignaturas.json")) {
             Gson gson = new Gson();

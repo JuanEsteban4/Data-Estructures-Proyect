@@ -36,7 +36,8 @@ public class ControladorAsignaturas implements ActionListener{
         this.add.agregar.addActionListener(this);
         this.vista.buscar.addActionListener(this);
         this.vista.restablecer.addActionListener(this);
-        
+        this.vista.orden.addActionListener(this);
+                
         this.actualizarVistaListado();
     }
     
@@ -77,6 +78,15 @@ public class ControladorAsignaturas implements ActionListener{
         this.vista.asignaturasLista.removeAll();
         puntero = 0;
         for(Asignatura r: activity.getListado()){
+            dibujarAsignatura(r);
+        }
+        repaint();
+    }
+    
+    private void actualizarVistaListado(Asignatura[] s){
+        this.vista.asignaturasLista.removeAll();
+        puntero = 0;
+        for(Asignatura r: s){
             dibujarAsignatura(r);
         }
         repaint();
@@ -162,6 +172,20 @@ public class ControladorAsignaturas implements ActionListener{
         System.out.println("Hala");
     }
     
+    private void cambiarOrden(){
+        if(this.vista.orden.getSelectedIndex() == 0){
+            this.actualizarVistaListado();
+            return;
+        }
+        if(this.vista.orden.getSelectedIndex() == 1){
+            this.activity.ordenarAsignaturaByCodigo();
+        }
+        if(this.vista.orden.getSelectedIndex() == 2){
+            this.activity.ordenarAsignaturaByNombre();
+        }
+        this.actualizarVistaListado(this.activity.orden);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.vista.add){
@@ -186,6 +210,9 @@ public class ControladorAsignaturas implements ActionListener{
         if(e.getSource() == this.vista.restablecer){
             this.vista.codigo.setText("");
             this.actualizarVistaListado();
+        }
+        if(e.getSource() == this.vista.orden){
+            cambiarOrden();
         }
     }    
 }
