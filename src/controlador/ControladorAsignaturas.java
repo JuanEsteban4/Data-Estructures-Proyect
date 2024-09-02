@@ -210,6 +210,8 @@ public class ControladorAsignaturas implements ActionListener{
         if(e.getSource() == this.vista.restablecer){
             this.vista.codigo.setText("");
             this.actualizarVistaListado();
+            this.vista.buscar.setEnabled(false);
+            this.vista.restablecer.setVisible(false);
         }
         if(e.getSource() == this.vista.orden){
             cambiarOrden();
