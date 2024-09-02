@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-class DisjoinSet {
+public class DisjoinSet {
     int[] rank, parent;
     int n;
     Map<String, ArrayList<Asignatura>> asignaturasPorEdificio; // Mapa de listas de asignaturas por edificio
@@ -65,11 +65,10 @@ class DisjoinSet {
 
     // Agregar asignatura y unir al edificio correspondiente
     public void agregarAsignatura(Asignatura asignatura) {
-        String edificio = asignatura.getEdificio(); // Obtener el nombre del edificio
+        String edificio = asignatura.getEdificio().toUpperCase(); // Obtener el nombre del edificio
         char primeraLetra = edificio.charAt(0); // Usar la primera letra del nombre del edificio
         int indiceEdificio = letraAIndice(primeraLetra);
-        int indiceAsignatura = letraAIndice(asignatura.getNombre().charAt(0)); // Usar la primera letra del nombre de la asignatura como su índice
-
+        int indiceAsignatura = letraAIndice(asignatura.getNombre().toUpperCase().charAt(0)); // Usar la primera letra del nombre de la asignatura como su índice
         // Unir la asignatura al conjunto del edificio correspondiente
         union(indiceEdificio, indiceAsignatura);
 
@@ -89,8 +88,12 @@ class DisjoinSet {
             }
         }
     }
+    
+    public ArrayList<Asignatura> mostrarEdificiosConAsignaturas(String Letra) {
+        return this.asignaturasPorEdificio.get(Letra);
+    }
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         DisjoinSet ds = new DisjoinSet(26);
 
         Asignatura asignatura1 = new Asignatura("Algebra", "MAT101", "Dr. Gomez", 3, "A");
@@ -117,5 +120,5 @@ class DisjoinSet {
 
         // Mostrar los edificios con sus asignaturas
         ds.mostrarEdificiosConAsignaturas();
-    }
+    }*/
 }

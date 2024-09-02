@@ -5,6 +5,7 @@ import functions.AsignaturasActivity;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Asignatura;
 import vista.asignaturas.*;
@@ -37,6 +38,7 @@ public class ControladorAsignaturas implements ActionListener{
         this.vista.buscar.addActionListener(this);
         this.vista.restablecer.addActionListener(this);
         this.vista.orden.addActionListener(this);
+        this.vista.edificio.addActionListener(this);
                 
         this.actualizarVistaListado();
     }
@@ -77,6 +79,10 @@ public class ControladorAsignaturas implements ActionListener{
     private void actualizarVistaListado(){
         this.vista.asignaturasLista.removeAll();
         puntero = 0;
+        if( activity.getListado()== null) {
+            repaint();
+            return;
+        }
         for(Asignatura r: activity.getListado()){
             dibujarAsignatura(r);
         }
@@ -86,6 +92,23 @@ public class ControladorAsignaturas implements ActionListener{
     private void actualizarVistaListado(Asignatura[] s){
         this.vista.asignaturasLista.removeAll();
         puntero = 0;
+        if(s == null) {
+            repaint();
+            return;
+        }
+        for(Asignatura r: s){
+            dibujarAsignatura(r);
+        }
+        repaint();
+    }
+    
+    private void actualizarVistaListado(ArrayList<Asignatura> s){
+        this.vista.asignaturasLista.removeAll();
+        puntero = 0;
+        if(s == null) {
+            repaint();
+            return;
+        }
         for(Asignatura r: s){
             dibujarAsignatura(r);
         }
@@ -112,7 +135,7 @@ public class ControladorAsignaturas implements ActionListener{
             this.add.creditosWarn.setVisible(true);
             result = false;
         }
-        if(this.add.edificio.getText().isEmpty()){
+        if(this.add.edificio.getText().isEmpty() || IsNumeric(this.add.edificio.getText().charAt(0))){
             this.add.edificioWarn.setVisible(true);
             result = false;
         }
@@ -186,6 +209,20 @@ public class ControladorAsignaturas implements ActionListener{
         this.actualizarVistaListado(this.activity.orden);
     }
     
+    private void cambiarOrden(int index){
+        switch(index){
+            case 0 -> actualizarVistaListado();
+            case 1 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("A"));
+            case 2 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("B"));
+            case 3 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("C"));
+            case 4 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("D"));
+            case 5 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("E"));
+            case 6 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("F"));
+            case 7 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("G"));
+            case 8 -> actualizarVistaListado(activity.set.mostrarEdificiosConAsignaturas("H"));
+        }
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.vista.add){
@@ -216,5 +253,17 @@ public class ControladorAsignaturas implements ActionListener{
         if(e.getSource() == this.vista.orden){
             cambiarOrden();
         }
+        if(e.getSource() == this.vista.edificio){
+            cambiarOrden(this.vista.edificio.getSelectedIndex());
+        }
     }    
+
+    private boolean IsNumeric(char s) {
+        try{
+            Integer.valueOf(String.valueOf(s));
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
+    }
 }

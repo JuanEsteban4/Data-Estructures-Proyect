@@ -2,18 +2,18 @@ package DataEstructures;
 
 import java.util.Arrays;
 
-public class ArrayList<T> {
+public class ArrayListOur<T> {
     private static final int DEFAULT_CAPACITY = 10; // Capacidad inicial por defecto
     private Object[] elements; // Array de elementos
     private int size = 0; // Número de elementos en la lista
 
     // Constructor sin parámetros
-    public ArrayList() {
+    public ArrayListOur() {
         elements = new Object[DEFAULT_CAPACITY]; // Inicializar con capacidad por defecto
     }
 
     // Constructor con capacidad inicial especificada
-    public ArrayList(int initialCapacity) {
+    public ArrayListOur(int initialCapacity) {
         if (initialCapacity <= 0) {
             throw new IllegalArgumentException("La capacidad inicial debe ser mayor a 0.");
         }
@@ -77,7 +77,4 @@ public class ArrayList<T> {
         System.out.println();
     }
 
-
-    public static void main(String[] args) {
-    }
 }

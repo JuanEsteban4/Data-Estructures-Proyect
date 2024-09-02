@@ -2,8 +2,7 @@ package functions;
 
 import java.util.ArrayList;
 import modelo.Asignatura;
-import DataEstructures.AVL; 
-import DataEstructures.Heap;
+import DataEstructures.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
@@ -14,6 +13,7 @@ public class AsignaturasActivity  {
     
     private ArrayList<Asignatura> listadoAsignaturas;
     private AVL asignaturasAVL = new AVL();
+    public DisjoinSet set = new DisjoinSet(20);
     public Asignatura[] orden;
     
     public AsignaturasActivity() {
@@ -23,6 +23,7 @@ public class AsignaturasActivity  {
         }else{
             for(Asignatura asignatura:this.listadoAsignaturas){
                 asignaturasAVL.insertAVL(asignatura);
+                set.agregarAsignatura(asignatura);
             }
         }
 
@@ -65,6 +66,10 @@ public class AsignaturasActivity  {
             asignaturas[i] = (Asignatura) objetos[i];
         }
         this.orden = Heap.heapSort(asignaturas, Asignatura.CompareNombre);
+    }
+    
+    public ArrayList<Asignatura> OrdenarAsignaturasPorEdificio(String Letra){
+        return set.mostrarEdificiosConAsignaturas(Letra);
     }
     public void saveAsignaturas(){
         try (FileWriter writer = new FileWriter("resources\\asignaturas.json")) {

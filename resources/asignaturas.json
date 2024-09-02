@@ -1,1 +1,1 @@
-[{"nombre":"Math","codigo":"1","profesor":"Julio","creditos":4,"edificio":"Edificio A","notas":[{"porcentaje":10.0,"nota":5.0,"info":"Parcial"}]},{"nombre":"AAA","codigo":"123","profesor":"3","creditos":3,"edificio":"3","notas":[]}]
+[{"nombre":"AAA","codigo":"123","profesor":"3","creditos":3,"edificio":"B","notas":[]}]
