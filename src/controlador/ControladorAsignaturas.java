@@ -32,7 +32,7 @@ public class ControladorAsignaturas implements ActionListener{
     
     public void init(){
         this.main.setMain(vista);
-        
+        this.puntero = this.activity.getListado().size();
         this.vista.add.addActionListener(this);
         this.add.agregar.addActionListener(this);
         this.vista.buscar.addActionListener(this);
@@ -231,13 +231,13 @@ public class ControladorAsignaturas implements ActionListener{
         }
         if(e.getSource() == this.add.agregar){
             if(!verifyInput()) return;
+            System.out.println("HOLA");
             agregarAsignatura(new Asignatura(this.add.nombre.getText(),
                                              this.add.codigo.getText(),
                                              this.add.profesor.getText(),
                                              Integer.parseInt(this.add.creditos.getText()),
                                              this.add.edificio.getText())
             );
-            
             limpiarVistaAdd();
             cerrarVistaAdd();
         }

@@ -162,7 +162,7 @@ public class Heap {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         // Crear un MinHeap con capacidad para 10 recordatorios y con 3 hijos por nodo.
         MinHeap minHeap = new MinHeap(10, 3);
 
@@ -191,7 +191,7 @@ public class Heap {
 
         System.out.println("-----------------------------------------------------");
  
-        */
+        
         //ASIGNATURTAS
         Asignatura[] asignaturas = {
             new Asignatura("Matematicas", "101", "Alvaro", 5, "Edificio A"),
@@ -216,5 +216,5 @@ public class Heap {
         for (Asignatura asignatura : asignaturasOrdenadasPorNombre) {
             System.out.println(asignatura);
         }
-    }
+    }*/
 }
