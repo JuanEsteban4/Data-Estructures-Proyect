@@ -1,3 +1,0 @@
-vista.asignaturas.AsignaturaNotas
-vista.asignaturas.NumericEditor
-vista.asignaturas.DecimalDocumentFilter

@@ -233,12 +233,16 @@ public class ControladorAsignaturas implements ActionListener{
             if(!verifyInput()) return;
             System.out.println("HOLA");
             agregarAsignatura(new Asignatura(this.add.nombre.getText(),
-                                             this.add.codigo.getText(),
-                                             this.add.profesor.getText(),
-                                             Integer.parseInt(this.add.creditos.getText()),
-                                             this.add.edificio.getText())
-            );
-            limpiarVistaAdd();
+                                 this.add.codigo.getText(),
+                                 this.add.profesor.getText(),
+                                 Integer.parseInt(this.add.creditos.getText()),
+                                 this.add.edificio.getText(),
+                                 (String)this.add.jComboBoxDia.getSelectedItem(),
+                                 (String)this.add.jComboBoxHora.getSelectedItem(),
+                                 (String)this.add.jComboBoxHora.getSelectedItem())
+);
+
+           limpiarVistaAdd();
             cerrarVistaAdd();
         }
         if(e.getSource() == this.vista.buscar){

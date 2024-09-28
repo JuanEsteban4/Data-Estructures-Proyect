@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+
+
 public class AsignaturasActivity  {
     
     private ArrayList<Asignatura> listadoAsignaturas;
@@ -16,18 +18,21 @@ public class AsignaturasActivity  {
     public DisjoinSet set = new DisjoinSet(20);
     public Asignatura[] orden;
     
+
     public AsignaturasActivity() {
         loadAsignaturas();
-        if(this.listadoAsignaturas == null){
-        this.listadoAsignaturas = new ArrayList<>();
-        }else{
-            for(Asignatura asignatura:this.listadoAsignaturas){
+        if (this.listadoAsignaturas == null) {
+            this.listadoAsignaturas = new ArrayList<>();
+        } else {
+            for (Asignatura asignatura : this.listadoAsignaturas) {
                 asignaturasAVL.insertAVL(asignatura);
                 set.agregarAsignatura(asignatura);
             }
         }
-
     }
+  
+    
+    
     public ArrayList<Asignatura> getListado(){
         return listadoAsignaturas;
     }
@@ -35,13 +40,17 @@ public class AsignaturasActivity  {
     public void agregarAsignatura(Asignatura asignatura) {
         listadoAsignaturas.add(asignatura);
         asignaturasAVL.insertAVL(asignatura);
+
     }
 
     //Metodo para eliminar una asignatura por su codigo
     public void eliminarAsignatura(String codigo) {
         Asignatura asignatura = this.buscarAsignaturaPorCodigo(codigo); // Creamos una instancia de Asignatura solo con el código
         listadoAsignaturas.remove(asignatura);
+
     }
+    
+    
     
     //Metodo para buscar una asignatura por su codigo
      public Asignatura buscarAsignaturaPorCodigo(String codigo) {
@@ -81,6 +90,33 @@ public class AsignaturasActivity  {
         
     }
     
+    
+
+    
+    
+    //Metodo para obtener una lista de asignaturas
+    public ArrayList<Asignatura> obtenerAsignaturasPorProfesor(String nombreProfesor) {
+    ArrayList<Asignatura> asignaturasPorProfesor = new ArrayList<>();
+    for (Asignatura asignatura : listadoAsignaturas) {
+        if (asignatura.getProfesor().equals(nombreProfesor)) {
+            asignaturasPorProfesor.add(asignatura);
+        }
+    }
+    return asignaturasPorProfesor;
+    }
+    
+    //Metodo para obtener lista de profesores
+    public ArrayList<String> obtenerProfesoresDisponibles() {
+        ArrayList<String> profesores = new ArrayList<>();
+        for (Asignatura asignatura : listadoAsignaturas) {
+            String nombreProfesor = asignatura.getProfesor();
+            if (!profesores.contains(nombreProfesor)) {
+                profesores.add(nombreProfesor);  // Añadir si no está ya en la lista
+            }
+        }
+        return profesores;
+    }
+    
     private void loadAsignaturas(){
         try (FileReader reader = new FileReader("resources\\asignaturas.json")) {
             Gson gson = new Gson();
@@ -91,4 +127,10 @@ public class AsignaturasActivity  {
         }
 
     }
+    
+    
+     
 }
+
+
+

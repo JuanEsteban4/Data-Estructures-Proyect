@@ -12,7 +12,8 @@ public class AgregarAsignatura extends javax.swing.JDialog {
         profesorWarn.setVisible(false);
         creditosWarn.setVisible(false);
         edificioWarn.setVisible(false);
-        
+        HoraWarn.setVisible(false);
+        DiaWarn1.setVisible(false);
     }
 
     /**
@@ -41,6 +42,12 @@ public class AgregarAsignatura extends javax.swing.JDialog {
         profesorWarn = new javax.swing.JLabel();
         creditosWarn = new javax.swing.JLabel();
         edificioWarn = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        HoraWarn = new javax.swing.JLabel();
+        DiaWarn1 = new javax.swing.JLabel();
+        jComboBoxHora = new javax.swing.JComboBox<>();
+        jComboBoxDia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -66,7 +73,7 @@ public class AgregarAsignatura extends javax.swing.JDialog {
                 agregarActionPerformed(evt);
             }
         });
-        jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
+        jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, -1, -1));
 
         nombreWarn.setForeground(new java.awt.Color(204, 0, 0));
         nombreWarn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -76,7 +83,6 @@ public class AgregarAsignatura extends javax.swing.JDialog {
 
         nombre.setToolTipText("");
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 52, 209, -1));
-        nombre.getAccessibleContext().setAccessibleDescription("");
 
         codigo.setToolTipText("");
         jPanel1.add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 108, 209, -1));
@@ -89,7 +95,6 @@ public class AgregarAsignatura extends javax.swing.JDialog {
 
         edificio.setToolTipText("");
         jPanel1.add(edificio, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 278, 209, -1));
-        edificio.getAccessibleContext().setAccessibleDescription("");
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -137,6 +142,41 @@ public class AgregarAsignatura extends javax.swing.JDialog {
         nombreWarn.setVisible(false);
         jPanel1.add(edificioWarn, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 306, 209, -1));
 
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Hora");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Dia");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+
+        HoraWarn.setForeground(new java.awt.Color(204, 0, 0));
+        HoraWarn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HoraWarn.setText("Ingrese una hora");
+        nombreWarn.setVisible(false);
+        jPanel1.add(HoraWarn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 100, -1));
+
+        DiaWarn1.setForeground(new java.awt.Color(204, 0, 0));
+        DiaWarn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DiaWarn1.setText("Ingrese un dia");
+        nombreWarn.setVisible(false);
+        jPanel1.add(DiaWarn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 110, -1));
+
+        jComboBoxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7AM-9AM", "9AM-11AM", "11AM-13PM", "14PM-16PM", "16PM-18PM" }));
+        jPanel1.add(jComboBoxHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 90, -1));
+
+        jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" }));
+        jComboBoxDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDiaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,7 +185,7 @@ public class AgregarAsignatura extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
 
         pack();
@@ -155,12 +195,18 @@ public class AgregarAsignatura extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_agregarActionPerformed
 
+    private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDiaActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel DiaWarn1;
+    public javax.swing.JLabel HoraWarn;
     public javax.swing.JButton agregar;
     public javax.swing.JTextField codigo;
     public javax.swing.JLabel codigoWarn;
@@ -168,11 +214,15 @@ public class AgregarAsignatura extends javax.swing.JDialog {
     public javax.swing.JLabel creditosWarn;
     public javax.swing.JTextField edificio;
     public javax.swing.JLabel edificioWarn;
+    public javax.swing.JComboBox<String> jComboBoxDia;
+    public javax.swing.JComboBox<String> jComboBoxHora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JTextField nombre;
     public javax.swing.JLabel nombreWarn;

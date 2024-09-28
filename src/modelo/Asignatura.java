@@ -1,9 +1,10 @@
 package modelo;
-import java.util.ArrayList;
 
+import functions.AsignaturasActivity;
+import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Asignatura{
+public class Asignatura {
     
     private String nombre;
     private String codigo;
@@ -11,16 +12,23 @@ public class Asignatura{
     private int creditos;
     private String edificio;
     private ArrayList<Nota> notas;
-
-    public Asignatura(String nombre, String codigo, String profesor, int creditos,String edificio) {
+    private String dia;  
+    private String horaInicio;
+    private String horaFin;
+    
+    public Asignatura(String nombre, String codigo, String profesor, int creditos, String edificio, String dia, String horaInicio, String horaFin) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.profesor = profesor;
         this.creditos = creditos;
         this.edificio = edificio;
-        this.notas = new ArrayList();
+        this.notas = new ArrayList<>();
+        this.dia = dia;  
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
     }
     
+    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -69,17 +77,47 @@ public class Asignatura{
         this.notas = notas;
     }
 
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+    
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
+    }
+
     @Override
     public String toString() {
         return "Asignatura{" +
-                "nombre = '" + nombre + '\'' +
-                ", codigo = '" + codigo + '\'' +
-                ", profesor = '" + profesor + '\'' +
-                ", creditos = " + creditos +
+                "nombre='" + nombre + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", profesor='" + profesor + '\'' +
+                ", creditos=" + creditos +
+                ", dia=" + dia +
+                ", horaInicio=" + horaInicio +
+                ", horaFin=" + horaFin +
                 '}';
     }
 
-    //Compare para la comparacion por codigo
+    
+   
+    
+    // Comparadores
     public static Comparator<Asignatura> CompareCodigo = new Comparator<Asignatura>() {
         @Override
         public int compare(Asignatura a1, Asignatura a2) {
@@ -87,16 +125,12 @@ public class Asignatura{
         }
     };
 
-    //Compare para la comparacion de la primera letra del nombre de la asignatura
     public static Comparator<Asignatura> CompareNombre = new Comparator<Asignatura>() {
         @Override
         public int compare(Asignatura a1, Asignatura a2) {
-        // Obtener la primera letra de cada nombre
-        char letra1 = a1.nombre.charAt(0);
-        char letra2 = a2.nombre.charAt(0);
-
-        // Comparar las letras
-        return Character.compare(letra1, letra2);
+            char letra1 = a1.nombre.charAt(0);
+            char letra2 = a2.nombre.charAt(0);
+            return Character.compare(letra1, letra2);
         }
     };
 }

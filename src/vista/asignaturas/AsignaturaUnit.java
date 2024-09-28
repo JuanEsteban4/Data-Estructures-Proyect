@@ -17,10 +17,7 @@ public class AsignaturaUnit extends javax.swing.JPanel {
     public void updateInfo(){
         nombre.setText(info.getCodigo()+ " - " +info.getNombre());
         creditos.setText("Creditos: "+ String.valueOf(info.getCreditos())+ "  " + "Docente: " + info.getProfesor());
-        fecha.setText("(Horario)  Edificio: "+info.getEdificio());
-        //Poner horarios con hash despues//
-        //if(fecha.getText().isEmpty()) fecha.setVisible(false);
-        
+        fecha.setText(info.getHoraInicio() + "   Edificio "+info.getEdificio());
     }
 
     /**
